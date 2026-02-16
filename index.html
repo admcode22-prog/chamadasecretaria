@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Chamada Jovens - Sistema de Presença</title>
+    
+    <!-- Supabase Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-top">
+                <h1>📋 Chamada Jovens</h1>
+                <div class="header-actions">
+                    <button id="btnMenu" class="btn-icon">☰</button>
+                </div>
+            </div>
+            <div class="data-info">
+                <span id="dataAtual"></span>
+                <span class="badge">Sábado</span>
+            </div>
+        </header>
+
+        <!-- Menu Lateral -->
+        <div id="menuLateral" class="menu-lateral">
+            <div class="menu-header">
+                <h3>Menu</h3>
+                <button id="btnFecharMenu" class="btn-icon">✕</button>
+            </div>
+            <div class="menu-items">
+                <button id="btnNovoEnsaio" class="menu-item">
+                    <span>➕</span> Novo Ensaio
+                </button>
+                <button id="btnRelatorios" class="menu-item">
+                    <span>📊</span> Relatórios
+                </button>
+                <button id="btnExportar" class="menu-item">
+                    <span>📥</span> Exportar Dados
+                </button>
+                <button id="btnImportar" class="menu-item">
+                    <span>📤</span> Importar Dados
+                </button>
+            </div>
+        </div>
+        <div id="overlay" class="overlay"></div>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+            <!-- Seção de Chamada -->
+            <div id="presencaSection" class="section active">
+                <div class="section-header">
+                    <h2>Chamada do Dia</h2>
+                    <div class="data-selector">
+                        <input type="date" id="dataEnsaio" class="data-input">
+                    </div>
+                </div>
+
+                <div class="acoes-rapidas">
+                    <button id="marcarTodosPresentes" class="btn-acao presente">
+                        <span>✅</span> Todos Presentes
+                    </button>
+                    <button id="marcarTodosAusentes" class="btn-acao ausente">
+                        <span>❌</span> Todos Ausentes
+                    </button>
+                    <button id="limparLista" class="btn-acao">
+                        <span>🔄</span> Limpar
+                    </button>
+                </div>
+
+                <div class="busca-container">
+                    <input type="text" id="buscaJovem" placeholder="🔍 Buscar jovem..." class="busca-input">
+                </div>
+
+                <div class="jovens-grid" id="listaJovens"></div>
+
+                <div class="salvar-fixo">
+                    <button id="salvarChamada" class="btn-salvar">💾 SALVAR CHAMADA</button>
+                </div>
+            </div>
+
+            <!-- Seção de Relatórios -->
+            <div id="relatoriosSection" class="section">
+                <div class="section-header">
+                    <h2>Relatórios</h2>
+                    <button id="btnVoltar" class="btn-voltar">← Voltar</button>
+                </div>
+
+                <div class="filtros-container">
+                    <select id="tipoRelatorio" class="select-relatorio">
+                        <option value="geral">📋 Relatório Geral</option>
+                        <option value="individual">👤 Relatório por Jovem</option>
+                        <option value="maisFaltam">📉 Quem Mais Falta</option>
+                        <option value="ultimosEnsaio">✅ Últimos Ensaios</option>
+                        <option value="nuncaForam">🚫 Quem Nunca Foi</option>
+                    </select>
+
+                    <div id="filtroIndividual" style="display: none;">
+                        <select id="selecionarJovem" class="select-jovem">
+                            <option value="">Selecione um jovem</option>
+                        </select>
+                    </div>
+
+                    <div class="botoes-relatorio">
+                        <button id="gerarRelatorio" class="btn-relatorio">Gerar Relatório</button>
+                        <button id="exportarRelatorio" class="btn-relatorio secundario">📤 Exportar</button>
+                    </div>
+                </div>
+
+                <div class="resultado-relatorio" id="resultadoRelatorio"></div>
+            </div>
+        </main>
+
+        <input type="file" id="importarArquivo" accept=".json" style="display: none;">
+    </div>
+
+    <!-- Script Principal -->
+    <script src="script.js"></script>
+</body>
+</html>
